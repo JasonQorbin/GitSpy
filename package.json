@@ -4,6 +4,7 @@
   "description": "A full-stack app that extracts information from the Github public API",
   "main": "index.js",
   "scripts": {
+    "start" : "nodemon ./server/server.js",
     "test": "test"
   },
   "keywords": [
