@@ -1,0 +1,23 @@
+{
+  "name": "githubspy",
+  "version": "0.1.0",
+  "description": "A full-stack app that extracts information from the Github public API",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "git",
+    "github",
+    "react",
+    "fullstack",
+    "REST",
+    "expressjs"
+  ],
+  "author": "JasonQorbin",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
