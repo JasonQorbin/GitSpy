@@ -2,3 +2,9 @@
 
 /build/
 /node_modules/
+
+# Env variables
+.env
+
+# Miscellaneous
+Notes.md
