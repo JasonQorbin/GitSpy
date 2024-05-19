@@ -5,10 +5,6 @@ const PORT = process.env.PORT || 8000;
 
 const UserController = require('./controllers/UserController');
 
-server.get('/', (request, response) => {
-    response.send("Hi, from the server!");
-})
-
 //Get user details
 server.get('/users/:username', UserController.getUserDetails);
 //List user repos
