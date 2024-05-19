@@ -1,38 +1,49 @@
-.App {
+.page-container {
+  display : flex;
+  flex-direction : row;
+  height : 100vh;
+  padding : 30px;
+  justify-content: center;
+}
+
+.page-container aside {
+  width : 350px;
+}
+
+#profile-pic {
+  display : inline-block;
+  width : 350px;
+  height : 350px;
+  border : black 1px solid;
+  border-radius: 175px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main {
+  width : 860px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.repo-tile {
+  padding : 5px;
+  margin : 5px;
+  display : flex;
+  flex-direction : row;
+  justify-content: space-evenly;
+  border-radius: 3px;
+  border: 1px solid rgba(47, 79, 79, 0.51);
+  box-shadow: 1px 1px rgba(47, 79, 79, 0.51);
+  transition: box-shadow 0.5s;
+  transition-timing-function: ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.repo-tile:hover {
+  box-shadow: 3px 3px rgba(16, 114, 206, 0.43);
 }
 
-.App-link {
-  color: #61dafb;
+.repo-tile .left-tile-pane {
+  width : 50%
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.repo-tile .right-tile-pane {
+  width : 50%;
 }
