@@ -1,4 +1,14 @@
-.page-container {
+#search-bar {
+  display : block;
+  margin : 20px auto;
+  padding: 2px 20px;
+  font-size: 1.5rem;
+  width : 35vw  ;
+  min-width: 300px;
+  border-radius: 6px;
+}
+
+#main-page-content {
   display : flex;
   flex-direction : row;
   height : 100vh;
@@ -6,8 +16,9 @@
   justify-content: center;
 }
 
-.page-container aside {
+#main-page-content aside {
   width : 350px;
+  margin : 10px 20px;
 }
 
 #profile-pic {
@@ -15,8 +26,13 @@
   width : 350px;
   height : 350px;
   border : black 1px solid;
-  border-radius: 175px;
-  text-align: center;
+  border-radius : 175px;
+  text-align : center;
+  vertical-align : middle;
+}
+
+#pic-span {
+  line-height: 350px;
 }
 
 main {

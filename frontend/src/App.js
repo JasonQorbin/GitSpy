@@ -29,20 +29,25 @@ function RepoTiles() {
 function App() {
     return (
         <div className="page-container">
-            <aside>
-                <div>
-                    <div id="profile-pic">Profile picture</div>
-                    <h1>Full name</h1>
-                    <h2>Username</h2>
-                    <span className="divider"></span>
-                    <p>Location</p>
-                    <p>Email</p>
-                    <p>Twitter</p>
-                </div>
-            </aside>
-            <main>
-              <RepoTiles />
-            </main>
+            <div id="search-bar-container">
+                <input id="search-bar" type="text" placeholder="Search..."/>
+            </div>
+            <div id="main-page-content">
+                <aside>
+                    <div>
+                        <div id="profile-pic"><span id="pic-span"></span>Profile picture</div>
+                        <h1>Full name</h1>
+                        <h2>Username</h2>
+                        <span className="divider"></span>
+                        <p>Location</p>
+                        <p>Email</p>
+                        <p>Twitter</p>
+                    </div>
+                </aside>
+                <main>
+                  <RepoTiles />
+                </main>
+            </div>
         </div>
     )
 }
