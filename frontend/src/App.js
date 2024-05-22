@@ -30,7 +30,7 @@ function App() {
     return (
         <div className="page-container">
             <div id="search-bar-container">
-                <input id="search-bar" type="text" placeholder="Search..."/>
+                <input id="search-bar" type="text" placeholder="Search for a user..."/>
             </div>
             <div id="main-page-content">
                 <aside>
