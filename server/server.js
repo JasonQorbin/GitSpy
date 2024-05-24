@@ -9,6 +9,8 @@ const UserController = require('./controllers/UserController');
 server.get('/users/:username', UserController.getUserDetails);
 //List user repos
 server.get('/users/:username/repos', UserController.getUserRepos);
+//Search for a user by username
+server.get('/search/:username', UserController.searchUsers);
 
 const http = server.listen(8000, () => {
     console.log(`Express server now listening on port ${PORT}`);
