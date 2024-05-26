@@ -1,7 +1,7 @@
 function HomePage() {
     return (
         <div id="main-page-content">
-            The is the default route
+            Search for a GitHub User using the search bar.
         </div>
     );
 }
