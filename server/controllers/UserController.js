@@ -9,13 +9,10 @@ function getUserDetails(request, response) {
         }
     };
 
-    console.log(fetchProperties);
-    console.log(JSON.stringify(fetchProperties));
     fetch(`https://api.github.com/users/${request.params.username}`, fetchProperties).then(
         (answer) => {
             answer.json().then(
                 (output) => {
-                    console.log(output);
                     response.send(output);
                 }
             )
@@ -38,7 +35,6 @@ function getUserRepos(request, response) {
         (answer) => {
             answer.json().then(
                 (output) => {
-                    console.log(output);
                     response.send(output);
                 }
             )
@@ -47,6 +43,9 @@ function getUserRepos(request, response) {
 }
 
 function searchUsers(request, response) {
+    console.log(request.query);
+    const pageToGet = request.query.page || 1;
+
     const fetchProperties = {
         method: "GET",
         headers : {
@@ -59,11 +58,12 @@ function searchUsers(request, response) {
 
     const outputObject = {};
 
-    fetch(`https://api.github.com/search/users?q=${request.params.username}&per_page=10&page=2`, fetchProperties).then(
+    fetch(`https://api.github.com/search/users?q=${request.params.username}&per_page=16&page=${pageToGet}`, fetchProperties).then(
         (answer) => {
             parseLinkHeader(answer, outputObject);
             answer.json().then(
                 (output) => {
+                    outputObject.currentPage = pageToGet;
                     outputObject.users = output.items
                     response.send(outputObject);
                 }
@@ -91,8 +91,13 @@ function parseLinkHeader(response, outputObject) {
 }
 
 function recursivelyExtractLinks(linkString, outputObject){
-    function getLink (linkSegment) {
-        return linkSegment.substring(1, linkSegment.length-1);
+    //Todo: Refactor this section so I don't parse the headers myself and rather use the Headers object.
+    function getLinkPage (linkSegment) {
+        if (linkSegment.charAt(linkSegment.length-1) == '>') {
+            linkSegment = linkSegment.substring(0, linkSegment.length -1 );
+        }
+        const params = new URLSearchParams(linkSegment);
+        return params.get('page');
     }
 
     function getRelation(relationSegment){
@@ -126,20 +131,20 @@ function recursivelyExtractLinks(linkString, outputObject){
         relationSegment = firstSegment;
         linkSegment = secondSegment
     }
-    const link = getLink(linkSegment);
+    const page = getLinkPage(linkSegment);
     const relation = getRelation(relationSegment);
     switch (relation) {
         case 'first':
-            outputObject.first = link;
+            outputObject.first = page;
             break;
         case 'next':
-            outputObject.next = link;
+            outputObject.next = page;
             break;
         case 'prev':
-            outputObject.prev = link;
+            outputObject.prev = page;
             break;
         case 'last':
-            outputObject.last = link;
+            outputObject.last = page;
             break;
         default:
             console.log("Couldn't determine the link relation.");

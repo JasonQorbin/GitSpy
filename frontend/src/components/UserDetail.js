@@ -1,5 +1,6 @@
-import {useState} from "react";
+import SearchBar from "./SearchBar";
 import LoadingScreen from "./LoadingScreen";
+import {useState} from "react";
 import { useParams } from "react-router-dom";
 
 
@@ -48,7 +49,7 @@ function UserDetail(props) {
     const [fetchingRepos, setFetchingRepos] = useState(false);
 
     function fetchUserDetails(){
-        fetch(`/users/${userToShow}`)
+        fetch(`/api/users/${userToShow}`)
             .then((response) => {
                 response.json()
                     .then( (details) => {
@@ -60,7 +61,7 @@ function UserDetail(props) {
                     })
             });
 
-        fetch(`/users/${userToShow}/repos`)
+        fetch(`/api/users/${userToShow}/repos`)
             .then((response) => {
                 response.json()
                     .then( (downloadedRepos) => {
@@ -78,21 +79,24 @@ function UserDetail(props) {
 
     if (loaded) {
         return (
-            <div id="main-page-content">
-                <aside>
-                    <div>
-                        <img id="profile-pic" src={profilePic}></img>
-                        <h1>{fullName}</h1>
-                        <h2>{username}</h2>
-                        <span className="divider"></span>
-                        <p>{location}</p>
-                        <p>{email}</p>
-                        <p>{twitter}</p>
-                    </div>
-                </aside>
-                <main>
-                    <RepoTiles repositories={repos}/>
-                </main>
+            <div>
+                <SearchBar />
+                <div id="main-page-content">
+                    <aside>
+                        <div>
+                            <img id="profile-pic" src={profilePic}></img>
+                            <h1>{fullName}</h1>
+                            <h2>{username}</h2>
+                            <span className="divider"></span>
+                            <p>{location}</p>
+                            <p>{email}</p>
+                            <p>{twitter}</p>
+                        </div>
+                    </aside>
+                    <main>
+                        <RepoTiles repositories={repos}/>
+                    </main>
+                </div>
             </div>
         );
     } else {

@@ -1,7 +1,12 @@
+import SearchBar from "./SearchBar";
+
 function LoadingScreen() {
     return (
-        <div id="main-page-content">
-            Loading Screen
+        <div>
+            <SearchBar />
+            <div id="main-page-content">
+                Loading Screen
+            </div>
         </div>
     )
 }
