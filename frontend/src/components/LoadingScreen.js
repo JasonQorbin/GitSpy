@@ -5,7 +5,7 @@ function LoadingScreen() {
         <div>
             <SearchBar />
             <div id="main-page-content">
-                Loading Screen
+                <p className="centerplace-text">Loading...</p>
             </div>
         </div>
     )

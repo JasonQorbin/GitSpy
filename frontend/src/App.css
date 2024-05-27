@@ -1,3 +1,15 @@
+body {
+  margin : 0;
+  padding : 0;
+  background : #150323;
+  color: white;
+}
+
+.centerplace-text {
+  font : 2rem bold arial, sans-serif;
+  text-align: center;
+}
+
 #search-bar {
   display : block;
   margin : 20px auto;
@@ -54,6 +66,7 @@ main {
 
 .repo-tile:hover {
   box-shadow: 3px 3px rgba(16, 114, 206, 0.43);
+  background: darkcyan;
 }
 
 .repo-tile .left-tile-pane {
@@ -106,4 +119,26 @@ main {
 
 .user-search-result img {
   max-height : 120px;
+}
+
+.internal-link {
+  color : gold;
+  text-decoration: none;
+}
+
+.external-link {
+  color : lightyellow;
+}
+
+.user-detail-section p svg {
+  display : inline-block;
+  width : 2.5rem;
+}
+
+.user-detail-section span.divider {
+  display : inline-block;
+  width : 100%;
+  height : 3px;
+  background : white;
+  margin : 10px 0;
 }

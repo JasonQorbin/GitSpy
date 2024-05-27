@@ -1,14 +1,14 @@
 import SearchBar from "./SearchBar";
 
-function HomePage() {
+function LandingPage() {
     return (
         <div>
             <SearchBar />
             <div id="main-page-content">
-                Search for a GitHub User using the search bar.
+                <p className="centerplace-text">Search for a GitHub User using the search bar</p>
             </div>
         </div>
     );
 }
 
-export default HomePage;
+export default LandingPage;

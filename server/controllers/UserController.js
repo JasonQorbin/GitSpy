@@ -43,7 +43,6 @@ function getUserRepos(request, response) {
 }
 
 function searchUsers(request, response) {
-    console.log(request.query);
     const pageToGet = request.query.page || 1;
 
     const fetchProperties = {
@@ -155,8 +154,33 @@ function recursivelyExtractLinks(linkString, outputObject){
     }
 }
 
+function getCommits(request, response) {
+    const user = request.query.user;
+    const repo = request.query.repo;
+
+    const fetchProperties = {
+        method: "GET",
+        headers : {
+            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+            "X-Github-API-Version": '2022-11-28',
+            "User-Agent": `${process.env.USER_AGENT}`,
+            "Accept": "application/vnd.github+json"
+        }
+    };
+
+    fetch(`https://api.github.com/repos/${user}/${repo}/commits`, fetchProperties).then( (fetchResponse) => {
+        fetchResponse.json().then( (data) => {
+            console.log(data);
+            response.send(data);
+            response.status(200);
+            response.end();
+        })
+    })
+}
+
 module.exports = {
     getUserDetails,
     getUserRepos,
-    searchUsers
+    searchUsers,
+    getCommits
 }

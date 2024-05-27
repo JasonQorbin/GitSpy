@@ -11,6 +11,8 @@ server.get('/api/users/:username', UserController.getUserDetails);
 server.get('/api/users/:username/repos', UserController.getUserRepos);
 //Search for a user by username
 server.get('/api/search/:username', UserController.searchUsers);
+//Search for repo details
+server.get('/api/repo', UserController.getCommits);
 
 const http = server.listen(8000, () => {
     console.log(`Express server now listening on port ${PORT}`);

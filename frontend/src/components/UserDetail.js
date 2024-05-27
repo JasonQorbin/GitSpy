@@ -2,6 +2,9 @@ import SearchBar from "./SearchBar";
 import LoadingScreen from "./LoadingScreen";
 import {useState} from "react";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowUpRightFromSquare, faEnvelope, faMapPin,  } from "@fortawesome/free-solid-svg-icons";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 
 function RepoTiles(props) {
@@ -16,8 +19,7 @@ function RepoTiles(props) {
         return (
             <div key={repo.id} className="repo-tile">
                 <div className="left-tile-pane">
-                    <h3><a href={repo.html_url}>{repo.name}</a></h3>
-                    <p><small>Forked from ...</small></p>
+                    <h3><a className="external-link" href={repo.html_url}>{repo.name}<FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a></h3>
                     <p><em>{repo.description}</em></p>
                 </div>
                 <div className="right-tile-pane">
@@ -35,12 +37,57 @@ function RepoTiles(props) {
     );
 }
 
+/**
+ * Functional component that renders the contents of the aside element of the User Detail page.
+ *
+ * Not every GitHub user fills in all their information or may have chosen to not make certain fields
+ * like their email publicly visible. This component checks if the information for a field is available before
+ * rendering it section for it.
+ *
+ * @param props Should contain all the fields to be displayed. If one of the fields is not available the value should be null.
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function UserDetailSideBar(props) {
+    const elements = [];
+
+    if (props.profilePic === null) {
+        elements.push(<div key="profile-pic" id="profile-pic"></div>);
+    } else {
+        elements.push(<img key="profile-pic" id="profile-pic" src={props.profilePic}/>);
+    }
+
+    elements.push(<h1 key="fullName">{props.fullName}</h1>);
+    elements.push(<h2 key="username">
+        <a className="external-link" href={props.userURL}>{props.username}<FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a>
+    </h2>);
+    elements.push(<span key="divider" className="divider"></span>);
+    if (props.location !== null) {
+        elements.push(<p key="location"><FontAwesomeIcon icon={faMapPin}/>{props.location}</p>)
+    }
+
+    if (props.email !== null) {
+        elements.push(<p key="email"><FontAwesomeIcon icon={faEnvelope}/>{props.email}</p>);
+    }
+
+    if (props.twitter !== null) {
+        elements.push(<p key="twitter"><FontAwesomeIcon icon={faXTwitter} />{props.twitter}</p>);
+    }
+
+    return (
+        <div className="user-detail-section">
+            {elements}
+        </div>
+    );
+}
+
 function UserDetail(props) {
-    let { userToShow } = useParams();
+    let {userToShow} = useParams();
 
     const [profilePic, setProfilePic] = useState(null);
     const [fullName, setFullName] = useState(null);
     const [username, setUserName] = useState(userToShow);
+    const [userURL, setUserURL] = useState(null);
     const [location, setLocation] = useState(null);
     const [email, setEmail] = useState(null);
     const [twitter, setTwitter] = useState(null);
@@ -58,6 +105,7 @@ function UserDetail(props) {
                         setLocation(details.location);
                         setTwitter(details.twitter_username);
                         setEmail(details.email);
+                        setUserURL(details.html_url);
                     })
             });
 
@@ -83,15 +131,14 @@ function UserDetail(props) {
                 <SearchBar />
                 <div id="main-page-content">
                     <aside>
-                        <div>
-                            <img id="profile-pic" src={profilePic}></img>
-                            <h1>{fullName}</h1>
-                            <h2>{username}</h2>
-                            <span className="divider"></span>
-                            <p>{location}</p>
-                            <p>{email}</p>
-                            <p>{twitter}</p>
-                        </div>
+                        <UserDetailSideBar
+                            profilePic={profilePic}
+                            fullName={fullName}
+                            username={username}
+                            location={location}
+                            email={email}
+                            twitter={twitter}
+                            userURL={userURL}/>
                     </aside>
                     <main>
                         <RepoTiles repositories={repos}/>
