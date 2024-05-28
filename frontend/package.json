@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts src/test",
+    "test": "react-scripts qtest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
