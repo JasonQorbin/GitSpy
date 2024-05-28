@@ -19,7 +19,15 @@ function CommitListing(props) {
             });
         setLoading(true);
     }
-    if (loaded) {
+
+    if ( loaded ) {
+        //It's possible for a Git repo to be empty (no commits).
+        //In this case the object returned is not an array.
+        //Just return a empty div.
+        if(!Array.isArray(commits)) {
+            return <div></div>;
+        }
+
         const rows = commits.map( (commit) => {
             let message = commit.commit.message;
             if (message.length > maxMessageLength - 1) {

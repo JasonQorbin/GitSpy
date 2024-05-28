@@ -37,7 +37,6 @@ function UserDetail(props) {
             .then((response) => {
                 response.json()
                     .then( (downloadedRepos) => {
-                       console.log(downloadedRepos);
                        setRepos(downloadedRepos);
                        setLoaded(true);
                     })
