@@ -65,7 +65,7 @@ function UserDetail(props) {
                             userURL={userURL}/>
                     </aside>
                     <main>
-                        <RepoTiles repositories={repos}/>
+                        <RepoTiles username={username} repositories={repos}/>
                     </main>
                 </div>
             </div>

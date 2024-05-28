@@ -168,7 +168,7 @@ function getCommits(request, response) {
         }
     };
 
-    fetch(`https://api.github.com/repos/${user}/${repo}/commits`, fetchProperties).then( (fetchResponse) => {
+    fetch(`https://api.github.com/repos/${user}/${repo}/commits?per_page=5&page=1`, fetchProperties).then( (fetchResponse) => {
         fetchResponse.json().then( (data) => {
             console.log(data);
             response.send(data);

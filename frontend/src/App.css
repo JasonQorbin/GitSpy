@@ -54,14 +54,17 @@ main {
 .repo-tile {
   padding : 5px;
   margin : 5px;
-  display : flex;
-  flex-direction : row;
-  justify-content: space-evenly;
   border-radius: 3px;
   border: 1px solid rgba(47, 79, 79, 0.51);
   box-shadow: 1px 1px rgba(47, 79, 79, 0.51);
   transition: box-shadow 0.5s;
   transition-timing-function: ease;
+}
+
+.repo-tile-row-wrapper {
+  display : flex;
+  flex-direction : row;
+  justify-content: space-evenly;
 }
 
 .repo-tile:hover {
@@ -135,10 +138,23 @@ main {
   width : 2.5rem;
 }
 
-.user-detail-section span.divider {
+span.divider {
   display : inline-block;
   width : 100%;
   height : 3px;
-  background : white;
+  background : lightsalmon;
   margin : 10px 0;
+}
+
+.commit-table {
+  width : 100%;
+}
+
+.commit-table th {
+  text-align : left;
+  text-decoration: underline;
+}
+
+.commit-table tr {
+  line-height: 1.5rem;
 }
