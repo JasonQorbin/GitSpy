@@ -1,7 +1,10 @@
 require('dotenv').config();
+const helmet = require('helmet');
 const express = require('express');
 const server = express();
 const PORT = process.env.PORT || 8000;
+
+server.use(helmet());
 
 const UserController = require('./controllers/UserController');
 
