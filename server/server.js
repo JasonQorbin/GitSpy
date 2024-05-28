@@ -1,10 +1,16 @@
 require('dotenv').config();
 const helmet = require('helmet');
+const {requestLogging} = require('./middleware/logging');
 const express = require('express');
 const server = express();
 const PORT = process.env.PORT || 8000;
 
+//Apply middleware
 server.use(helmet());
+server.use(requestLogging);
+
+//Define routes
+//No need to use a Router instance because the API only needs one route per path for the GET method.
 
 const UserController = require('./controllers/UserController');
 
