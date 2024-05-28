@@ -1,7 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
 import UserDetailSideBar from "../components/UserDetailSideBar";
-import RepoTiles from "../components/RepoTiles";
+import RepoTileHeader from "../components/RepoTileHeader";
 
 test('Full User detail side bar', () => {
     const tree = renderer
@@ -30,35 +30,23 @@ test('User detail side bar without email, location or twitter', () => {
     expect(tree).toMatchSnapshot();
 })
 
-test("Repo tiles", () => {
+test("Repo tile header", () => {
     const testData = [
         {
             updated_at : "2023-12-04T20:43:40Z",
+            created_at : "2021-12-04T20:43:40Z",
             id: 11223344,
             html_url: "testHTMLurl",
             name: "testName",
             description: "Some test description",
             language: "Haskell",
-        },
-        {
-            updated_at : "2023-09-24T20:32:40Z",
-            id: 66992288,
-            html_url: "testHTMLurl2",
-            name: "testName2",
-            description: "Some other test description",
-            language: "Pascal",
-        },
-        {
-            updated_at : "2021-03-04T16:10:40Z",
-            id: 12454512,
-            html_url: "testHTMLurl3",
-            name: "testName3",
-            description: "Yet another test description",
-            language: "Ruby",
         }
     ];
+
+    const updatedAt = new Date(testData.updated_at);
+    const createdAt = new Date(testData.created_at);
     const tree = renderer
-        .create(<RepoTiles repositories={testData} />)
+        .create(<RepoTileHeader repo={testData} updatedAt={updatedAt} createdAt={createdAt}/>)
         .toJSON();
     expect(tree).toMatchSnapshot();
 })
