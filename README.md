@@ -14,11 +14,10 @@ And see a summary of the user's profile and repositories:
 
 ## Installation and usage
 
-Both the frontend and backend are NodeJS projects.
+1. Clone the repo
+2. Install the required dependencies and frontend artifacts by running `npm run build` from the root folder.
+3. Start the server with `npm start`. 
 
-After cloning the repo, run `npm install` in both the `frontend` and `server`
-directories. Then start the server first before starting the in a development server
-frontend. Both can be started with `npm start`
 
 ## Private resources
 
