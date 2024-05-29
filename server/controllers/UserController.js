@@ -1,13 +1,25 @@
-function getUserDetails(request, response) {
+function getFetchConfig() {
     const fetchProperties = {
         method: "GET",
         headers : {
-            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-            "X-Github-API-Version": '2022-11-28',
-            "User-Agent": `${process.env.USER_AGENT}`,
+            "X-Github-Api-Version": '2022-11-28',
             "Accept": "application/vnd.github+json"
         }
     };
+
+    if (process.env.ACCESS_TOKEN !== undefined) {
+        fetchProperties.headers.Authorization = `Bearer ${process.env.ACCESS_TOKEN}`;
+    }
+
+    if (process.env.USER_AGENT !== undefined) {
+        fetchProperties.headers["User-Agent"] = `${process.env.USER_AGENT}`;
+    }
+
+    return fetchProperties;
+}
+
+function getUserDetails(request, response) {
+    const fetchProperties = getFetchConfig();
 
     fetch(`https://api.github.com/users/${request.params.username}`, fetchProperties).then(
         (answer) => {
@@ -27,15 +39,7 @@ function getUserDetails(request, response) {
  * @param response Returns the output from GitHub
  */
 function getUserRepos(request, response) {
-    const fetchProperties = {
-        method: "GET",
-        headers : {
-            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-            "X-Github-API-Version": '2022-11-28',
-            "User-Agent": `${process.env.USER_AGENT}`,
-            "Accept": "application/vnd.github+json"
-        }
-    };
+    const fetchProperties = getFetchConfig();
 
     fetch(`https://api.github.com/users/${request.params.username}/repos`, fetchProperties).then(
         (answer) => {
@@ -58,15 +62,7 @@ function getUserRepos(request, response) {
 function searchUsers(request, response) {
     const pageToGet = request.query.page || 1;
 
-    const fetchProperties = {
-        method: "GET",
-        headers : {
-            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-            "X-Github-Api-Version": '2022-11-28',
-            "User-Agent": `${process.env.USER_AGENT}`,
-            "Accept": "application/vnd.github+json"
-        }
-    };
+    const fetchProperties = getFetchConfig();
 
     const outputObject = {};
 
@@ -192,15 +188,7 @@ function getCommits(request, response) {
         return;
     }
 
-    const fetchProperties = {
-        method: "GET",
-        headers : {
-            Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-            "X-Github-API-Version": '2022-11-28',
-            "User-Agent": `${process.env.USER_AGENT}`,
-            "Accept": "application/vnd.github+json"
-        }
-    };
+    const fetchProperties = getFetchConfig();
 
     fetch(`https://api.github.com/repos/${user}/${repo}/commits?per_page=5&page=1`, fetchProperties).then( (fetchResponse) => {
         fetchResponse.json().then( (data) => {
