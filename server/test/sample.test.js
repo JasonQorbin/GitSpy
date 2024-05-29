@@ -7,23 +7,6 @@ chai.use(chaiHttp);
 
 
 describe("Test routes", () => {
-    it("Bad Route", (done) => {
-        chai.request(server)
-            .get('/badRoute')
-            .end((error, response) => {
-                expect(response.status).to.equal(400);
-                done();
-            });
-    });
-
-    it("Bad route nested inside a good route", (done) => {
-        chai.request(server)
-            .get('/users/username/repos/badRoute')
-            .end((error, response) => {
-                expect(response.status).to.equal(400);
-                done();
-            });
-    });
 
     //Note for review: From this point on these are no longer unit tests because they rely on a response
     //from an external service. These are now essentially integration tests as they require the Github servers to be

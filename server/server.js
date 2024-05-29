@@ -3,10 +3,21 @@ const helmet = require('helmet');
 const {requestLogging} = require('./middleware/logging');
 const express = require('express');
 const server = express();
+const path = require('path');
 const PORT = process.env.PORT || 8000;
 
 //Apply middleware
-server.use(helmet());
+server.use(helmet({
+    contentSecurityPolicy : {
+        directives: {
+            imgSrc: [
+                `'self'`,
+                `data:`,
+                `*.githubusercontent.com`
+            ]
+        }
+    }
+}));
 server.use(requestLogging);
 
 //Define routes
@@ -23,11 +34,15 @@ server.get('/api/search/:username', UserController.searchUsers);
 //Search for repo commits
 server.get('/api/repo', UserController.getCommits);
 
-//default route rejecting all other requests
-server.get('*', (request, response) => {
-    response.status(400);
-    response.end();
-})
+if (process.env.NODE_ENV !== 'production'){
+    const projectRoot = require('path').resolve(__dirname, '..');
+    server.use(express.static(path.join(projectRoot, 'frontend/build')));
+    server.get('*',(req,res)=>
+    {res.sendFile(path.resolve(projectRoot,
+        'frontend', 'build','index.html'));
+    });
+}
+
 
 const http = server.listen(8000, () => {
     console.log(`Express server now listening on port ${PORT}`);
