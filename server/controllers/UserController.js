@@ -157,6 +157,13 @@ function recursivelyExtractLinks(linkString, outputObject){
 function getCommits(request, response) {
     const user = request.query.user;
     const repo = request.query.repo;
+    console.log(repo);
+    console.log(user);
+    if (user === undefined || repo === undefined) {
+        response.status(400);
+        response.end();
+        return;
+    }
 
     const fetchProperties = {
         method: "GET",

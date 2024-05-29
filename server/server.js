@@ -23,6 +23,12 @@ server.get('/api/search/:username', UserController.searchUsers);
 //Search for repo commits
 server.get('/api/repo', UserController.getCommits);
 
+//default route rejecting all other requests
+server.get('*', (request, response) => {
+    response.status(400);
+    response.end();
+})
+
 const http = server.listen(8000, () => {
     console.log(`Express server now listening on port ${PORT}`);
 })
