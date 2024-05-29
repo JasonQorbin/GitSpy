@@ -1,5 +1,13 @@
 import {useState} from "react";
 
+
+/**
+ * Component that fetches and displays the last 5 commits of the given repo and user at the
+ * bottom of the RepoTiles.
+ *
+ * @param props Should contain a "username" and a "repo" to search for.
+ * @returns {JSX.Element}
+ */
 function CommitListing(props) {
     const [commits, setCommits] = useState([]);
     const [loaded, setLoaded] = useState(false);

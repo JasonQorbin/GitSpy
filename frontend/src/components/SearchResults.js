@@ -3,6 +3,13 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 
+/**
+ * Helper function to fetch user search results from the server.
+ *
+ * @param userToSearch The user login name to search for
+ * @param setUsers The callback to update the state of the component with the response from the server.
+ * @param setLoaded Callback to declare the component as being loaded and ready.
+ */
 function getUserSearchResults(userToSearch, setUsers, setLoaded) {
     let params = new URLSearchParams( document.location.search);
     const pageNumber = params.get('page') || 1;
@@ -15,9 +22,16 @@ function getUserSearchResults(userToSearch, setUsers, setLoaded) {
     });
 }
 
-
-
-function SearchResults(props) {
+/**
+ * Component that displays a grid of profile pictures and login matching the search criteria
+ * entered into the search bar.
+ *
+ * Expects to receive the search term as a query parameter.
+ *
+ * @returns {JSX.Element}
+ * @constructor
+ */
+function SearchResults() {
     const { userToSearch } = useParams();
 
     const [users, setUsers] = useState([]);

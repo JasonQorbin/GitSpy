@@ -1,6 +1,13 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Function component that displays the top half of the RepoTile header
+ *
+ * @param props Must contain the repo object from github.
+ * @returns {JSX.Element}
+ * @constructor
+ */
 function RepoTileHeader(props) {
     const dateOptions = {
         year: "numeric",

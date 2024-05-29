@@ -20,6 +20,12 @@ function getUserDetails(request, response) {
     )
 }
 
+/**
+ * Fetches a list of a user's repos from GitHub.
+ *
+ * @param request
+ * @param response Returns the output from GitHub
+ */
 function getUserRepos(request, response) {
     const fetchProperties = {
         method: "GET",
@@ -42,6 +48,13 @@ function getUserRepos(request, response) {
     )
 }
 
+/**
+ * Fetches a list of users from the GitHub API. Used in response to the user typing something
+ * into the search box.
+ *
+ * @param request Should have a query parameter for the "username" and optionally a "page" number (defaults to 1).
+ * @param response Returns the array from the GitHub API.
+ */
 function searchUsers(request, response) {
     const pageToGet = request.query.page || 1;
 
@@ -89,8 +102,14 @@ function parseLinkHeader(response, outputObject) {
     return outputObject;
 }
 
+/**
+ * Parses through the link header and sets "next, "prev", "first" and "last" properties on the outputObject that have
+ * relevant page numbers. Those page numbers should be used to construct new search urls.
+ *
+ * @param linkString The string to parse. (Initially the contents of the link header)
+ * @param outputObject The output from the user search that will be modified.
+ */
 function recursivelyExtractLinks(linkString, outputObject){
-    //Todo: Refactor this section so I don't parse the headers myself and rather use the Headers object.
     function getLinkPage (linkSegment) {
         if (linkSegment.charAt(linkSegment.length-1) == '>') {
             linkSegment = linkSegment.substring(0, linkSegment.length -1 );
@@ -154,6 +173,12 @@ function recursivelyExtractLinks(linkString, outputObject){
     }
 }
 
+/**
+ * Requests a list of the last 5 commits of a given user and repo from the GitHub API
+ *
+ * @param request Client request. Should have query parameters "user" and "repo"
+ * @param response Will return 400 if one of the query parameters is missing, otherwise will return JSON data.
+ */
 function getCommits(request, response) {
     const user = request.query.user;
     const repo = request.query.repo;
