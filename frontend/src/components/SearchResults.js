@@ -54,7 +54,7 @@ function SearchResults() {
         const userElements = users.users.map((user) => {
             return (
                 <div key={user.id} className="user-search-result">
-                    <img src={user.avatar_url} />
+                    <img src={user.avatar_url} alt="User profile pic"/>
                     <a className="internal-link" href={`/user/${user.login}`}>{user.login}</a>
                 </div>
             )

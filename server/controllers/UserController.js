@@ -111,7 +111,7 @@ function parseLinkHeader(response, outputObject) {
  */
 function recursivelyExtractLinks(linkString, outputObject){
     function getLinkPage (linkSegment) {
-        if (linkSegment.charAt(linkSegment.length-1) == '>') {
+        if (linkSegment.charAt(linkSegment.length-1) === '>') {
             linkSegment = linkSegment.substring(0, linkSegment.length -1 );
         }
         const params = new URLSearchParams(linkSegment);
@@ -127,7 +127,9 @@ function recursivelyExtractLinks(linkString, outputObject){
 
     }
 
-    if (linkString.length == 0) return;
+    if (linkString.length === 0) {
+        return;
+    }
 
     const commaIndex = linkString.indexOf(',');
     let currentSegment;
