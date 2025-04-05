@@ -6,11 +6,13 @@ public Github API to source the data.
 
 Search for users by name:
 
-*Insert screenshot of the search results*
+![Screenshot from 2025-04-05 06-50-13](https://github.com/user-attachments/assets/d0e8816d-f8b0-406d-a184-e46fa297cf2f)
+
 
 And see a summary of the user's profile and repositories:
 
-*Insert screenshot of the user details screen*
+![Screenshot from 2025-04-05 06-59-19](https://github.com/user-attachments/assets/632cb29b-08a7-44b9-8d7d-3ff47f363696)
+
 
 ## Installation and usage
 
